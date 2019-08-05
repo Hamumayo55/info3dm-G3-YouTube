@@ -11,10 +11,29 @@ from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+"""
+データの読み込み処理
+チャンネルID(cid)でヒカキンの動画のみとしている
+"""
 df = YouTuber.channel_videos.UUUM_videos()
 df_Hikakin = df[df['cid'] == 'UCZf__ehlCEBPop___sldpBUQ'].reset_index(drop=True)
 
 def preprocessingDTree(pre_df):
+
+    """
+    決定木を作成するために必要な前処理を行う関数
+        - 行う前処理
+            1. タイトル内に'[]'が含まれているかを1,0で判定
+            2. タイトル内に特定のワードが含まれているかを1,0で判定
+            3. タイトルの長さを3つに分ける
+            4. 300万再生以上なら1,その他は0とする
+    ----------
+    Parameters
+    df：pandas.core.frame.DataFrame
+    ----------
+    Return 
+    fix_df：前処理を行なったデータフレーム
+    """
     
     #タイトルの長さを確認
     pre_df['len_title'] = pre_df['title'].apply(lambda x: len(str(x).replace(' ', '')))
@@ -36,7 +55,7 @@ def preprocessingDTree(pre_df):
     pre_df.loc[pre_df['len_title'] < 28 ,"title_encode_len"] = 1
     pre_df.loc[pre_df['len_title'] < 22,"title_encode_len"] = 0
     
-    #100万再生なら1,違うなら0とする
+    #300万再生なら1,違うなら0とする
     pre_df.loc[pre_df['viewCount'] > 3000000,"view_encode"] = 1
     pre_df.loc[pre_df['view_encode'].isnull(),"view_encode"]= 0
     
@@ -46,12 +65,23 @@ def preprocessingDTree(pre_df):
     return fix_df
 
 def decisiontree(df):
+
+    """
+    決定木を実装している
+    preprocessingDTree()で処理されたデータ
+        - 特徴量(title_encode_Braces','title_encode_word','title_encode_len)
+        - 教師データ(再生数300万以上なら1,それ以下なら0)
+    ----------
+    Parameters
+    df：pandas.core.frame.DataFrame
+    """
    
     X = preprocessingDTree(df)
     Y = df['view_encode']
+    #データの分割処理
     X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state=0)
     
-    # 決定木インスタンス(木の深さ3)
+    # 決定木インスタンス(木の深さ8)
     model = DecisionTreeClassifier(max_depth=8)
     #学習モデル構築。引数に訓練データの特徴量と、それに対応したラベル
     model.fit(X_train, y_train)
@@ -63,6 +93,13 @@ def decisiontree(df):
     plot_cm(predicted,y_test)
     
 def plot_cm(predict,ytest):
+    """
+    混同行列を作成する
+    ----------
+    Parameters
+    predict：numpy.ndarray
+    ytest：pandas.core.series.Series
+    """
     plot_cm = confusion_matrix(predict,ytest)
     sns.heatmap(plot_cm, annot=True, cmap='Reds')
     

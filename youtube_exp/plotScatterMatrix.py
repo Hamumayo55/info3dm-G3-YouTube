@@ -4,10 +4,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+"""
+用意したデータフレームを引数としてplot_ScatterMatrixに
+渡すと散布図行列と相関行列を作成するプログラム
+"""
+
+#データフレームの準備
 df = YouTuber.channel_videos.UUUM_videos()
 df_Hikakin = df[df['cid'] == 'UCZf__ehlCEBPop___sldpBUQ'].reset_index(drop=True)
 
 def plot_ScatterMatrix(df):
+    """
+    散布図行列と相関行列を作成し、プロットする関数
+    
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+    """
     
     #タイトルの長さを確認
     df['len_title'] = df['title'].apply(lambda x: len(str(x).replace(' ', '')))
