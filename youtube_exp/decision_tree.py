@@ -10,6 +10,8 @@ from sklearn import tree
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
+from janome.tokenizer import Tokenizer
+import collections
 
 """
 データの読み込み処理
@@ -17,6 +19,31 @@ import matplotlib.pyplot as plt
 """
 df = YouTuber.channel_videos.UUUM_videos()
 df_Hikakin = df[df['cid'] == 'UCZf__ehlCEBPop___sldpBUQ'].reset_index(drop=True)
+
+def morphological(df_fram):
+
+    """
+    タイトルの単語を分けてワードカウントを行う
+    ----------
+    Parameters
+    df_fram : pandas.core.frame.DataFrame
+    ----------
+    Return
+    c：カウントしたワードの辞書
+    ----------
+    """
+
+    df_OneMillion = df_fram[df_fram["viewCount"] >3000000]
+     
+    list_tword = []
+    t = Tokenizer()
+    for i in range(len(df_OneMillion)):
+        title = df_OneMillion.iloc[i,1]
+        for token in t.tokenize(title):
+            list_tword.append((token.surface))
+            c = collections.Counter(list_tword)
+            
+    return print(c)
 
 def preprocessingDTree(pre_df):
 
@@ -93,6 +120,7 @@ def decisiontree(df):
     plot_cm(predicted,y_test)
     
 def plot_cm(predict,ytest):
+
     """
     混同行列を作成する
     ----------
@@ -103,4 +131,5 @@ def plot_cm(predict,ytest):
     plot_cm = confusion_matrix(predict,ytest)
     sns.heatmap(plot_cm, annot=True, cmap='Reds')
     
+morphological(df_Hikakin)
 decisiontree(df_Hikakin)
