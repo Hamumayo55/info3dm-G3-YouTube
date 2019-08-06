@@ -19,8 +19,15 @@ YouTubeにある動画の中で[HikakinTV](https://www.youtube.com/user/HikakinT
 `$ nohup jupyter notebook &`  
 
 2. *ファイル*(.py)実行方法  
-youtube_expのフォルダ内まで移動してコマンド:
+youtube_expのフォルダ内まで移動してコマンド
 `$ python 実行したいファイル`を行うと実行できる。
 
 3. doctestの実行方法  
-doctestの実装されているコード(morphogical.py)を実行するときは:`$ python morphogical.py -v`で行う。
+doctestの実装されているコード(morphogical.py)を実行するときは`$ python morphogical.py -v`で行う。
+
+## 使用するコード
+1. decision_tree.py  
+2. LinearRegression.py  
+3. Classification.py
+4. morphogical.py
+5. plotScatterMatrix.py
