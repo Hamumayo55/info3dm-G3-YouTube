@@ -25,7 +25,7 @@ def morphological(df_fram):
     """
     タイトルの単語を分けてワードカウントを行う
     ----------
-    Parameters
+    Args
     df_fram : pandas.core.frame.DataFrame
     ----------
     Return
@@ -55,7 +55,7 @@ def preprocessingDTree(pre_df):
             3. タイトルの長さを3つに分ける
             4. 300万再生以上なら1,その他は0とする
     ----------
-    Parameters
+    Args
     df：pandas.core.frame.DataFrame
     ----------
     Return 
@@ -99,7 +99,7 @@ def decisiontree(df):
         - 特徴量(title_encode_Braces','title_encode_word','title_encode_len)
         - 教師データ(再生数300万以上なら1,それ以下なら0)
     ----------
-    Parameters
+    Args
     df：pandas.core.frame.DataFrame
     """
    
@@ -124,7 +124,7 @@ def plot_cm(predict,ytest):
     """
     混同行列を作成する
     ----------
-    Parameters
+    Args
     predict：numpy.ndarray
     ytest：pandas.core.series.Series
     """

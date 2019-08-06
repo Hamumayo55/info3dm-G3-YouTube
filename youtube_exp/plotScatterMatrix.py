@@ -16,9 +16,8 @@ df_Hikakin = df[df['cid'] == 'UCZf__ehlCEBPop___sldpBUQ'].reset_index(drop=True)
 def plot_ScatterMatrix(df):
     """
     散布図行列と相関行列を作成し、プロットする関数
-    
-    Parameters
     ----------
+    Args
     df : pandas.core.frame.DataFrame
     """
     

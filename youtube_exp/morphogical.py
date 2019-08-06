@@ -17,11 +17,11 @@ def morphological(df_fram):
     """
     タイトルの単語を分けてワードカウントを行う
     ----------
-    Parameters
+    Args
     df_fram : pandas.core.frame.DataFrame
     ----------
     Return
-    type(c)：<class 'collections.Counter'>
+    type(c)：True
     ----------
     >>> morphological(df_Hikakin)
     True

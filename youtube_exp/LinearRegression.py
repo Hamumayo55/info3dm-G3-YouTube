@@ -21,9 +21,8 @@ def plot_ScatterMatrix(df):
 
     """
     散布図行列と相関行列を作成し、プロットする関数
-    
-    Parameters
     ----------
+    Args
     df : pandas.core.frame.DataFrame
     """
 
@@ -63,8 +62,7 @@ def LinearRegression(df):
     目的変数
         - 視聴回数
     ----------
-    Parameters
-    ----------
+    Args
     df : pandas.core.frame.DataFrame
     """
     
