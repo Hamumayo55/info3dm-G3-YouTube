@@ -50,4 +50,5 @@ doctestの実装されているコード(morphogical.py)を実行するときは
 氏名：大城 龍太郎  
 連絡先：e175739@ie.u-ryukyu.ac.jp
 
-
+## LICENSE
+https://github.com/Takuya12/info3dm-G3-YouTube/blob/add-license-1/LICENSE
